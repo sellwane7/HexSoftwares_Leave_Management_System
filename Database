@@ -1,0 +1,33 @@
+CREATE DATABASE EmployeeLeaveManagement;
+
+USE EmployeeLeaveManagement;
+
+CREATE TABLE EmployeeLeaveManagement.users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL,
+    role ENUM('admin', 'employee') NOT NULL
+);
+
+CREATE TABLE EmployeeLeaveManagement.leave_requests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_id INT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    reason TEXT NOT NULL,
+    status ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending',
+    FOREIGN KEY (employee_id) REFERENCES users(id)
+);
+
+CREATE TABLE EmployeeLeaveManagement.leave_balances (
+    user_id INT NOT NULL PRIMARY KEY,
+    balance_days INT DEFAULT 10 ,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+INSERT INTO EmployeeLeaveManagement.users (username, password, role) VALUES ('admin', 'admin123', 'admin');
+INSERT INTO EmployeeLeaveManagement.users (username, password, role) VALUES ('employee1', 'emp123', 'employee');
+
+INSERT INTO EmployeeLeaveManagement.leave_balances (user_id, balance_days) VALUES (2, 10);
+
+
