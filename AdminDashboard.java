@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class AdminDashboard extends JFrame {
-    private JTable table; // Declare the table as a class-level field
+    private JTable table; 
     private JButton approveButton, rejectButton, backButton;
 
     public AdminDashboard() {
@@ -17,25 +17,22 @@ public class AdminDashboard extends JFrame {
         heading.setFont(new Font("Arial", Font.BOLD, 20));
         add(heading, BorderLayout.NORTH);
 
-        // Initialize the table
         table = new JTable();
-        loadTableData(); // Load data into the table
+        loadTableData(); 
 
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Create the buttons
         JPanel buttonPanel = new JPanel();
         approveButton = new JButton("Approve");
         rejectButton = new JButton("Reject");
         backButton = new JButton("Back");
 
-        // Action listeners for buttons
         approveButton.addActionListener(e -> updateRequest("Approved"));
         rejectButton.addActionListener(e -> updateRequest("Rejected"));
         backButton.addActionListener(e -> {
             dispose(); // Close the Admin Dashboard
-            new LoginPage(); // Navigate back to the login page
+            new LoginPage(); //go back to the login page
         });
 
         buttonPanel.add(approveButton);
@@ -66,7 +63,7 @@ public class AdminDashboard extends JFrame {
                         rs.getString("status")
                 });
             }
-            table.setModel(model); // Set the model to the table
+            table.setModel(model);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -88,13 +85,13 @@ public class AdminDashboard extends JFrame {
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(this, "Request " + status + "!");
-            loadTableData(); // Refresh the table data after updating status
+            loadTableData(); 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        new AdminDashboard(); // Launch the Admin Dashboard
+        new AdminDashboard(); 
     }
 }
