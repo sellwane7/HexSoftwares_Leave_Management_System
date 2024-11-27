@@ -52,7 +52,7 @@ public class LoginPage extends JFrame {
         JPasswordField passwordField = new JPasswordField(15);
         panel.add(passwordField, gbc);
 
-        // Role selection dropdown
+        // Role selection
         gbc.gridy = 3;
         gbc.gridx = 0;
         JLabel roleLabel = new JLabel("Select Role:");
@@ -74,7 +74,6 @@ public class LoginPage extends JFrame {
         loginButton.setForeground(Color.WHITE);
         panel.add(loginButton, gbc);
 
-        // Login button action
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,7 +93,6 @@ public class LoginPage extends JFrame {
                         int userId = rs.getInt("id");
                         JOptionPane.showMessageDialog(null, "Login Successful!");
 
-                        // Navigate based on role
                         dispose();
                         if (selectedRole.equals("admin")) {
                             new AdminDashboard();
